@@ -1,0 +1,62 @@
+<div class="sidebar">
+  <div class="logo">
+    <mat-icon class="material-symbols-outlined" >assignment</mat-icon> Taskly
+  </div>
+
+  <button class="btn-create" mat-flat-button>
+    <mat-icon fontIcon="add"></mat-icon>
+    Create
+  </button>
+  <mat-selection-list>
+    @for (page of navLinks; track $index) {
+      @if (page.name == 'Notifications' || page.name == 'Search') {
+        <mat-list-item (click)="toggleDrawer(page.name)" >
+          <mat-icon [fontIcon]="page.icon" class="icon"></mat-icon>
+          {{ page.name }}
+        </mat-list-item>
+
+      } @else {
+        <mat-list-item (click)="toggleDrawer(page.name)" [routerLink]="page.route" >
+          <mat-icon [fontIcon]="page.icon" class="icon"></mat-icon>
+          {{ page.name }}</mat-list-item
+        >
+      }
+
+    }
+  </mat-selection-list>
+  <p class="section-title">
+    My boards
+  </p>
+
+  <mat-selection-list>
+    @for (board of boards; track $index) {
+      <mat-list-item [routerLink]="['/kanban']">
+        <img
+          src="{{ board.background }}"
+          alt="" class="background">
+        <span>{{ board.name }}</span>
+      </mat-list-item>
+    }
+  </mat-selection-list>
+
+  <p class="section-title">Invited boards</p>
+  <mat-selection-list>
+    @for (board of invitedBoards; track $index) {
+      <mat-list-item [routerLink]="['kanban']">
+        <img
+          src="{{ board.background }}"
+          alt="" class="background">
+        <span>{{ board.name }}</span>
+      </mat-list-item>
+    }
+  </mat-selection-list>
+
+
+  <div class="profile">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTw4xIzlTTRJKIQB1tq1Jbs5Rfj7hU6h1UtPg&s" alt="Profile">
+    <div class="info">
+      <p>Name</p>
+      <span>Workspace Account</span>
+    </div>
+  </div>
+</div>
