@@ -1,0 +1,15 @@
+
+
+table {
+  width: 100%;
+
+}
+body{
+  width: 100%;
+}
+
+tr:hover td {
+  background-color: var(--md-sys-color-on-secondary);
+  color: var(--md-sys-color-on-secondary-container);
+
+}
