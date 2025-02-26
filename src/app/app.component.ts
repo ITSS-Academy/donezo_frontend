@@ -6,11 +6,12 @@ import {SearchComponent} from './components/search/search.component';
 import {MatDrawer} from '@angular/material/sidenav';
 import {NotificationsComponent} from './components/notifications/notifications.component';
 import {NgStyle} from '@angular/common';
+import {SignInComponent} from './components/sign-in/sign-in.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, MaterialModule, SidebarComponent, SearchComponent, NotificationsComponent, NgStyle],
+  imports: [RouterOutlet, MaterialModule, SidebarComponent, SearchComponent, NotificationsComponent, NgStyle, SignInComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
