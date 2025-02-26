@@ -1,1 +1,20 @@
-<p>list-tasks works!</p>
+<div cdkDropListGroup class="kanban">
+  @for (list of lists; track $index) {
+    <div class="example-container">
+      <div class="header">
+        <p>{{list.title}}</p>
+        <button class="btn" mat-stroked-button>+ Add Card</button>
+      </div>
+      <div cdkDropList [cdkDropListData]="list.tasks" class="tasks-list"
+           (cdkDropListDropped)="drop($any($event))">
+        @for (task of list.tasks; track $index) {
+          <div class="example-box" cdkDrag>{{task.title}}</div>
+        }
+      </div>
+    </div>
+  }
+  <div>
+    <button class="btn-add" mat-stroked-button>+ Add List</button>
+  </div>
+</div>
+
