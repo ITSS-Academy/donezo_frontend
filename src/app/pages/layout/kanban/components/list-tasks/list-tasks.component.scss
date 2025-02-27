@@ -8,18 +8,21 @@
   border: 1px black solid;
   padding: 10px 20px;
   border-radius: 20px;
-  .header{
+
+  .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin: 0 0 20px 0;
-    .btn{
+
+    .btn {
       width: 110px;
       font-size: 11px;
       height: 32px;
       border-radius: 10px;
     }
-    p{
+
+    p {
       font-size: 17px;
       margin: 0;
     }
@@ -74,11 +77,13 @@
 .example-list.cdk-drop-list-dragging .example-box:not(.cdk-drag-placeholder) {
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
-.kanban{
+
+.kanban {
   display: flex;
   max-height: 100%;
   overflow-x: auto;
-  .btn-add{
+
+  .btn-add {
     width: 180px;;
     font-size: 11px;
     height: 45px;

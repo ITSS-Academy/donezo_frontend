@@ -1,29 +1,20 @@
-import { Routes } from '@angular/router';
-import {HomeComponent} from './pages/home/home.component';
-import {AllTasksComponent} from './pages/all-tasks/all-tasks.component';
-import {AllBoardsComponent} from './pages/all-boards/all-boards.component';
-import {KanbanComponent} from './pages/kanban/kanban.component';
+import {Routes} from '@angular/router';
+import {authGuard} from './guards/auth.guard';
+import {SignInComponent} from './pages/sign-in/sign-in.component';
 
 export const routes: Routes = [
   {
+    path: '', redirectTo: 'home', pathMatch: 'full'
+  },
+  {
+    path: 'login',
+    component: SignInComponent
+  },
+  {
     path: '',
-    redirectTo: 'home',
-    pathMatch: 'full'
+    canActivate: [authGuard],
+    loadChildren: () => import('./pages/layout/layout.routes').then(m => m.LayoutRoutes),
   },
-  {
-    path: 'home',
-    component: HomeComponent
-  },
-  {
-    path: 'allTasks',
-    component: AllTasksComponent,
-  },
-  {
-    path: 'allBoards',
-    component: AllBoardsComponent
-  },
-  {
-    path: 'kanban',
-    component: KanbanComponent
-  }
+
+  {path: '**', redirectTo: 'home'}
 ];

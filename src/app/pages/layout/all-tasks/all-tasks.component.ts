@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 
-import {MaterialModule} from '../../shared/modules/material.module';
+import {MaterialModule} from '../../../shared/modules/material.module';
+
 export interface Task {
   tag: number;
   name: string;
@@ -8,7 +9,6 @@ export interface Task {
   description: string;
   time: string;
 }
-
 
 
 @Component({
@@ -25,7 +25,6 @@ export class AllTasksComponent {
   dataSource = ELEMENT_DATA;
   protected readonly MaterialModule = MaterialModule;
 }
-
 
 
 const ELEMENT_DATA: Task[] = [

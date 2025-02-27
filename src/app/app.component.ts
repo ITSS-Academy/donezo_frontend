@@ -1,52 +1,43 @@
-import {Component, signal, ViewChild} from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import {Component, OnInit, signal, ViewChild} from '@angular/core';
+import {Router, RouterOutlet} from '@angular/router';
 import {MaterialModule} from './shared/modules/material.module';
 import {SidebarComponent} from './components/sidebar/sidebar.component';
 import {SearchComponent} from './components/search/search.component';
 import {MatDrawer} from '@angular/material/sidenav';
 import {NotificationsComponent} from './components/notifications/notifications.component';
 import {NgStyle} from '@angular/common';
-import {SignInComponent} from './components/sign-in/sign-in.component';
+import {Auth, onAuthStateChanged} from '@angular/fire/auth';
+import {AuthState} from './ngrx/auth.state';
+import {Store} from '@ngrx/store';
+import * as authActions from './ngrx/auth.actions';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, MaterialModule, SidebarComponent, SearchComponent, NotificationsComponent, NgStyle, SignInComponent],
+  imports: [RouterOutlet, MaterialModule, SidebarComponent, SearchComponent, NotificationsComponent, NgStyle],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'donezo_frontend';
 
-  @ViewChild('drawer') drawer!: MatDrawer;
+  constructor(private router: Router,
+              private auth: Auth,
+              private store: Store<{ auth: AuthState }>) {
+  }
 
-  isDrawerOpen = false;
-  activeDrawer: string | null = null;
-
-  constructor() {}
-
-  toggleDrawer(drawerName:string) {
-    console.log(drawerName);
-    console.log(this.activeDrawer);
-    if (this.activeDrawer === drawerName) {
-      this.isDrawerOpen = false;
-      this.activeDrawer = null;
-      this.drawer.close()
-    } else if (drawerName == 'Search' || drawerName == 'Notifications') {
-      this.activeDrawer = drawerName;
-      this.isDrawerOpen = true;
-      if (!this.drawer.opened){
-        this.drawer.open();
+  ngOnInit() {
+    onAuthStateChanged(this.auth, async (user) => {
+      if (user) {
+        console.log(user)
+        const accessToken = await user.getIdToken();
+        this.router.navigate(['/home']);
+        this.store.dispatch(authActions.storeAccessToken({accessToken: accessToken}));
+      } else {
+        console.log('User is signed out');
       }
-    }else {
-      this.isDrawerOpen = false;
-      this.activeDrawer = null;
-      this.drawer.close()
-    }
+    })
   }
 
-  resetActiveName() {
-    this.activeDrawer = null;
-    this.isDrawerOpen = false;
-  }
+  
 }

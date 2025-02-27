@@ -2,13 +2,13 @@
   @for (list of lists; track $index) {
     <div class="example-container">
       <div class="header">
-        <p>{{list.title}}</p>
+        <p>{{ list.title }}</p>
         <button class="btn" mat-stroked-button>+ Add Card</button>
       </div>
       <div cdkDropList [cdkDropListData]="list.tasks" class="tasks-list"
            (cdkDropListDropped)="drop($any($event))">
         @for (task of list.tasks; track $index) {
-          <div class="example-box" cdkDrag>{{task.title}}</div>
+          <div class="example-box" cdkDrag>{{ task.title }}</div>
         }
       </div>
     </div>

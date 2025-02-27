@@ -1,35 +1,28 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {
-  CdkDragDrop,
   CdkDrag,
+  CdkDragDrop,
   CdkDropList,
   CdkDropListGroup,
   moveItemInArray,
-  transferArrayItem,
+  transferArrayItem
 } from '@angular/cdk/drag-drop';
 import {MatButton} from '@angular/material/button';
-import {MatIconModule} from '@angular/material/icon';
-import {MatDividerModule} from '@angular/material/divider';
-import {MatButtonModule} from '@angular/material/button';
+import {MaterialModule} from '../../../../../shared/modules/material.module';
 
 @Component({
   selector: 'app-list-tasks',
   standalone: true,
   imports: [
+    CdkDrag,
     CdkDropList,
     CdkDropListGroup,
-    CdkDropList,
-    CdkDrag,
-    MatButton,
-    MatIconModule,
-    MatDividerModule,
-    MatButtonModule,
+    MaterialModule
   ],
   templateUrl: './list-tasks.component.html',
   styleUrl: './list-tasks.component.scss'
 })
 export class ListTasksComponent {
-
   lists = [
     {
       title: "Ideas",
@@ -58,7 +51,6 @@ export class ListTasksComponent {
     }
   }
 }
-
 
 
 let ideas = [
